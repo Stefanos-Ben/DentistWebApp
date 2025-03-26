@@ -1,68 +1,154 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* 2) Import Tailwind directly */
+@import "tailwindcss";
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@theme {
+  --color-background: #F2F2F2;
+  --color-primary: #7278F2;
+  --color-primary-light: #AEACF2;
+  --color-secondary: #D0F2DF;
+  --color-tertiary: #F28729;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  /* Font families */
+  --font-body: Geologica, sans-serif;
+
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+html {
+  scroll-behavior: smooth;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer {
+  body {
+    font-family: var(--font-body);
+    font-optical-sizing: auto;
+    background-color: var(--color-background);
   }
-  a:hover {
-    color: #747bff;
+
+  main {
+    @apply min-h-screen relative bg-background;
   }
-  button {
-    background-color: #f9f9f9;
+
+  h1 {
+    @apply mx-auto max-w-2xl text-center text-black text-3xl font-bold leading-tight sm:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl font-bold text-black sm:text-3xl;
+  }
+
+}
+
+@layer components {
+  .navbar {
+    @apply 
+      w-full fixed top-0 left-0 right-0 z-50 
+      flex items-center justify-between 
+      h-16
+      py-4 px-8
+      shadow-lg shadow-gray-600/5
+    bg-background text-black;
+
+    & h3{
+      @apply text-primary font-bold text-base line-clamp-1
+    }
+
+    & ul {
+        @apply flex items-center gap-6;
+    }
+
+    & li a {
+      @apply text-black font-medium hover:text-primary;
+    }
+
+    & button {
+      @apply  rounded-full bg-primary text-background text-sm font-semibold p-3 cursor-pointer;
+    }
+
+    .nav-links {
+      @apply
+        hidden           /* default hidden on mobile */
+        md:flex         /* display flex on md+ screens */
+        md:flex-row
+        md:items-center
+        md:gap-6
+        md:static       /* revert to static positioning on bigger screens */
+        md:shadow-none
+        transition-all
+        duration-300
+        ease-in-out
+        ;
+    }
+
+    .hamburger {
+      @apply
+        flex
+        items-center
+        justify-center
+        w-8 h-8
+        cursor-pointer
+        md:hidden /* hide on md+ */
+        ;
+    }
+
+  }
+  
+  .hero {
+    @apply 
+    w-full
+    max-w-screen-xl 
+    grid
+    grid-cols-5
+    grid-rows-2
+    gap-4
+    items-center
+    justify-items-center
+    px-2
+    py-6
+    max-md:grid-cols-1
+    max-md:gap-0
+    max-md:align-middle
+    max-md:mt-15;
+
+
+    
+
+    .portrait {
+      @apply w-80 h-96 object-cover;
+      border-radius: 60%/60%;
+      border-color: var(--color-primary);
+      border-width: 0.3cap;
+    }
+
+  }
+
+  .clinic {
+    @apply
+      w-full
+      max-w-screen-xl
+      flex
+      items-center
+      justify-center
+      justify-items-center
+      mt-40;
+  }
+
+  
+}
+
+ /* mx-auto max-w-4xl text-center text-5xl font-bold leading-tight tracking-[-1%] text-black sm:text-[64px] sm:leading-[76px] */
+
+
+ @utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
